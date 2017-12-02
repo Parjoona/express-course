@@ -44,6 +44,12 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+      pageTitle: 'Projects'
+  });
+});
+
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'About page',
@@ -64,3 +70,6 @@ app.use(express.static(__dirname + '/public'));
 app.listen(port, () => {
   console.log(`Server @ localhost:${port}`)
 });
+
+// HEROKU USAGE
+// git push heroku (newest update)
