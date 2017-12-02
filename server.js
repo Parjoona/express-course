@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
+
 let app = express();
 
 // HBS uses
@@ -21,9 +23,7 @@ app.use((req, res, next) => {
   let log = `${now}: ${req.method} '${req.url}'`;
   console.log(log);
   fs.appendFile('server.log', log + '\n', (err) => {
-    if (err) {
-      console.log('Unable to append server.log');
-    }
+    (err) ? console.log('Unable to append server.log'): ''
   })
   next();
 });
@@ -61,6 +61,6 @@ app.get('/bad', (req, res) => {
 app.use(express.static(__dirname + '/public'));
 
 // Making express listen for connection
-app.listen(3000, () => {
-  console.log('Server @ localhost:3000')
+app.listen(port, () => {
+  console.log(`Server @ localhost:${port}`)
 });
